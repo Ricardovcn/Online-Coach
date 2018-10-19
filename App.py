@@ -45,7 +45,6 @@ def requisicaoPlayer(url, metodo, tipoResposta, devId, authKey, session, nick):
     r = requests.get(urlPrefixo+metodo+tipoResposta+'/'+devId+'/'+assinatura(devId, metodo, authKey, timestamp)+'/'+session+'/'+timestamp+'/'+nick)
     return r.text
 
-
 #/getgods​[ResponseFormat]/{developerId}/{signature}/{session}/{timestamp}/{languageCode}
 def requisicaoDeuses(url, metodo, tipoResposta, devId, authKey, session, lingua):
     timestamp = datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S')
@@ -61,8 +60,8 @@ app = Flask(__name__)
 def api():
   if request.method == 'GET':
     global session 
-    if session == '':
-      session = criaSessao(urlPrefixo, 'createsession', 'json', devId, authKey)
+    #if session == '':
+      #session = criaSessao(urlPrefixo, 'createsession', 'json', devId, authKey)
     return render_template('index.html')  
   else:
     return json.dumps({'erro': 'Utilize o metodo GET para acessar essa API.'})
@@ -72,13 +71,25 @@ def deuses(nick):
   global player
   global nickname
   nickname = nick
-  gods =  requisicaoDeuses(urlPrefixo, 'getgods', 'json', devId, authKey, session,linguas['portugues'])
-  player = requisicaoPlayer(urlPrefixo, 'getplayer', 'json', devId, authKey, session, nick)
+  #gods =  requisicaoDeuses(urlPrefixo, 'getgods', 'json', devId, authKey, session,linguas['portugues'])
+  #player = requisicaoPlayer(urlPrefixo, 'getplayer', 'json', devId, authKey, session, nick)
+  arq = open('gods.json', 'r')
+  gods = arq.read()
+
   if player =='[]':
     return json.dumps({'erro':'Jogador inexistente'})
   else:
+    
+    gods = json.loads(gods)
+   # gods = gods
+  #  print(gods)
     nickname=nick
     return render_template('deuses.html', deuses = gods, nick=nick)
 
+
+
+@app.route('/player/deus/<id>', methods=['GET', 'POST'])
+def playerGod(id):
+  return 'asd'
 if __name__ == "__main__":
- app.run(debug=True)
+ app.run(debug=True, host='10.3.1.19')
