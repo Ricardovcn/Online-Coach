@@ -1,0 +1,31 @@
+body{
+    background-image: url('../imagens/background.jpg'); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: black;
+    background-attachment: fixed;
+  }
+
+ .centraliza{
+        margin: 0;
+        position: absolute;
+        top: 45%;
+        left: 40%;
+}
+
+.container{
+    width: 100%;
+}
+
+#divNick{
+    width: 40%;
+    position: absolute;
+    top: 40%;
+    left: 30%;
+}
+
+
+#textoNick{
+    font-size: 300%;
+    color: white;  
+}
