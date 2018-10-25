@@ -1,4 +1,4 @@
-#coding utf-8
+#coding: utf-8
 
 import json
 from flask import Flask, Response, render_template
@@ -23,9 +23,19 @@ session = ''
 nickname = ''
 
 player = ''
+
+deuses = ''
+
 linguas = {'portugues':10,'english':1}
 
-partidas = {'Arena':435, 'Assalto':445, 'Conquista':426, 'Justa':448}
+partidas = {'Arena':435, 'Assalto':445, 'Conquista':426, 'Justa':448, 'Colisão':466 }
+
+elos = {'0' : 'Você ainda não completou as 10 partidas classificatórias nesse modo de jogo.',
+        '1' : 'Bronze V', '2' : 'Bronze IV', '3' : 'Bronze III', '4': 'Bronze II', '5' : 'Bronze I',
+        '6': 'Prata V', '7': 'Prata IV', '8': 'Prata III', '9': 'Prata II', '10': 'Prata I',
+        '11': 'Ouro V', '12': 'Ouro IV', '13': 'Ouro III', '14': 'Ouro II', '15': 'Ouro I', 
+        '16': 'Platina V', '17': 'Platina IV', '18': 'Platina III', '19': 'Platina II', '20': 'Platina I', 
+        '21': 'Diamante V', '22': 'Diamante IV', '23': 'Diamante III', '24': 'Diamante II', '25': 'Diamante I', '26': 'Masters I',}
 
 #A assinatura é um hash md5 de um combinado de itens (devId, metodo_da_api, authKey, timestamp)
 def assinatura(devId, metodo, authKey, timestamp):
@@ -35,22 +45,29 @@ def assinatura(devId, metodo, authKey, timestamp):
 
 def criaSessao(url, metodo, tipoRetorno, devId, authKey):
   timestamp = datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S')
-  r = requests.get(urlPrefixo+metodo+tipoRetorno+'/'+devId+'/'+assinatura(devId, metodo, authKey, timestamp)+'/'+timestamp)
+  r = requests.get(url+metodo+tipoRetorno+'/'+devId+'/'+assinatura(devId, metodo, authKey, timestamp)+'/'+timestamp)
   dados = json.loads(r.text)
   return dados['session_id']
 
 #/getplayer​[ResponseFormat]/{developerId}/{signature}/{session}/{timestamp}/{playerName}
 def requisicaoPlayer(url, metodo, tipoResposta, devId, authKey, session, nick):
     timestamp = datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S')
-    r = requests.get(urlPrefixo+metodo+tipoResposta+'/'+devId+'/'+assinatura(devId, metodo, authKey, timestamp)+'/'+session+'/'+timestamp+'/'+nick)
+    r = requests.get(url+metodo+tipoResposta+'/'+devId+'/'+assinatura(devId, metodo, authKey, timestamp)+'/'+session+'/'+timestamp+'/'+nick)
     return r.text
 
 #/getgods​[ResponseFormat]/{developerId}/{signature}/{session}/{timestamp}/{languageCode}
 def requisicaoDeuses(url, metodo, tipoResposta, devId, authKey, session, lingua):
     timestamp = datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S')
-    r = requests.get(urlPrefixo+metodo+tipoResposta+'/'+devId+'/'+assinatura(devId, metodo, authKey, timestamp)+'/'+session+'/'+timestamp+'/'+str(lingua))
+    r = requests.get(url+metodo+tipoResposta+'/'+devId+'/'+assinatura(devId, metodo, authKey, timestamp)+'/'+session+'/'+timestamp+'/'+str(lingua))
     return r.text
 
+
+#/getqueuestats​[ResponseFormat]/{developerId}/{signature}/{session}/{timestamp}/{player}/{queue}
+def requisicaoPartidas(url, metodo, tipoResposta, devId, authKey, session, nick, queue):
+    timestamp = datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S')
+    r = requests.get(url+metodo+tipoResposta+'/'+devId+'/'+assinatura(devId, metodo, authKey, timestamp)+'/'+session+'/'+timestamp+'/'+nick+"/"+str(queue))
+    print(url+metodo+tipoResposta+'/'+devId+'/'+assinatura(devId, metodo, authKey, timestamp)+'/'+session+'/'+timestamp+'/'+nick+"/"+str(queue))
+    return r.text
 
 
  
@@ -60,36 +77,66 @@ app = Flask(__name__)
 def api():
   if request.method == 'GET':
     global session 
-    #if session == '':
-      #session = criaSessao(urlPrefixo, 'createsession', 'json', devId, authKey)
+    if session == '':
+      session = criaSessao(urlPrefixo, 'createsession', 'json', devId, authKey)
     return render_template('index.html')  
   else:
     return json.dumps({'erro': 'Utilize o metodo GET para acessar essa API.'})
 
-@app.route('/deuses/<nick>', methods=['GET', 'POST'])
-def deuses(nick):
+@app.route('/deuses', methods=['GET', 'POST'])
+def deuses():
+  global deuses
+  try:
+    with open('/cache/gods.json', 'r') as f:
+      gods = f.read()
+  except IOError:
+    gods =  requisicaoDeuses(urlPrefixo, 'getgods', 'json', devId, authKey, session,linguas['portugues'])
+    f = open('./cache/gods.json', 'w')
+    f.write(gods)
+  deuses = gods
+  gods = json.loads(gods)
+  return render_template('deuses.html', deuses = gods, nick=nickname)
+
+@app.route('/perfil/<nick>', methods=['GET', 'POST'])
+def perfil(nick):
   global player
   global nickname
+  global dadosPLayer
   nickname = nick
-  #gods =  requisicaoDeuses(urlPrefixo, 'getgods', 'json', devId, authKey, session,linguas['portugues'])
-  #player = requisicaoPlayer(urlPrefixo, 'getplayer', 'json', devId, authKey, session, nick)
-  arq = open('gods.json', 'r')
-  gods = arq.read()
-
+  player = requisicaoPlayer(urlPrefixo, 'getplayer', 'json', devId, authKey, session, nick)
+  dadosPLayer = json.loads(player)
   if player =='[]':
     return json.dumps({'erro':'Jogador inexistente'})
   else:
+    # requisicaoPartidas(urlPrefixo, 'getqueuestats​', 'json', devId, authKey, session, nick, partidas['Arena'])
+    # print(requisicaoPartidas)
+    dicas = []
+    print(dadosPLayer[0]['Wins'])
+    dadoPLayer = dadosPLayer[0]
+    print(type(dadoPLayer))
+
+    if dadoPLayer['MasteryLevel'] < 80:
+      dicas.append({'titulo': 'Maestrias', 'texto': 'Vc precisa melhorar', 'video': 'SMITE - EXPLICANDO SOBRE MAESTRIA DE DEUSES'})
+
+    if dadoPLayer['Wins'] * 100 / (dadoPLayer['Wins'] + dadoPLayer['Losses']) < 65: 
+      dicas.append({'titulo': 'Taxa de Vitórias', 'texto': 'Vc precisa melhorar', 'video': None})
     
-    gods = json.loads(gods)
-   # gods = gods
-  #  print(gods)
-    nickname=nick
-    return render_template('deuses.html', deuses = gods, nick=nick)
+    if dadoPLayer['Tier_Conquest'] == 0:
+      dicas.append({'titulo': 'Conquista Rankeada', 'texto': 'Vc precisa melhorar', 'video': 'SMITE LIGA CONQUISTA - INFORMAÇOES BÁSICAS SOBRE ELO E ORDEM DE PICK'})
+    
+    if dadoPLayer['Tier_Joust'] == 0:
+      dicas.append({'titulo': 'Justa Rankeada (3 vs 3)', 'texto': 'Vc precisa melhorar', 'video': 'SMITE - DICAS PARA SUBIR DE ELO NA JUSTA 3X3'})
+    
+    if dadoPLayer['Tier_Duel'] == 0: 
+      dicas.append({'titulo': 'Justa Rankeada (1 vs 1)', 'texto': 'Vc precisa melhorar', 'video': 'SMITE - DICAS PARA SE DAR BEM NO DUELO'})
+
+    return render_template('perfil.html', players=dadosPLayer , elo=elos, dica=dicas)
 
 
 
 @app.route('/player/deus/<id>', methods=['GET', 'POST'])
 def playerGod(id):
   return 'asd'
+
 if __name__ == "__main__":
- app.run(debug=True, host='10.3.1.19')
+ app.run(debug=True)
