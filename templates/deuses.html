@@ -6,62 +6,160 @@
 </head>
 <body>
     <link rel="stylesheet" href="{{url_for('static', filename='css/materialize.css')}}">
-    <link rel="stylesheet" href="../static/css/player.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/materialize.min.css')}}">
+    <link rel="stylesheet" href="../static/css/deuses.css">
     <link href="{{url_for('static', filename='css/icon.css')}}" rel="stylesheet">
+
     <nav>
         <div class="nav-wrapper indigo darken-4" id="navBar">
             <a class="brand-logo"><img class="responsive-img" src="../static/imagens/smite.png" width="180"></a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="#" id="#Gods">Basic</a></li>
-                <li><a href="/"><i class="material-icons amber-text">subdirectory_arrow_left</i></a></li>
+            <ul id="nav-mobile" class="right">
+                <li><a href="/perfil/{{nick}}"><i class="material-icons amber-text">subdirectory_arrow_left</i></a></li>
             </ul>
         </div>
     </nav>
-    
-    <div id="basicos" class="">    
-        <!--  <div class="col s3 left-align">
-            <div class="row">
-                <div class="col s12">
-                    <a href='#'><img class="responsive-img" src="../static/imagens/warriors.png" width="250"></a>
-                </div>
-                <div class="col s12">
-                    <a href='#'><img class="responsive-img" src="../static/imagens/hunters.jpg" width="250"></a>
-                </div>
-                <div class="col s12">
-                    <a href='#'><img class="responsive-img" src="../static/imagens/mages.png" width="250"></a>
-                </div>
-                <div class="col s12">
-                    <a href='#'><img class="responsive-img" src="../static/imagens/guardians.jpg" width="250"></a>
-                </div>
-                <div class="col s12">
-                    <a href='#'><img class="responsive-img" src="../static/imagens/assassins.png" width="250"></a>
-                </div>
-            </div>
-        </div>-->
-        
-        <div class='row'>
-            {% for i in deuses %}
-            <div class="col s2 m2">
-                <a href="{{url_for('playerGod', id=i.id)}}">
-                    <div class="card opaco">
-                        <div class="card-image">
-                            <img class='iconGod' src="{{i['godIcon_URL']}}">
-                        </div>
-                        <div class="card-content center-align contentGod">
-                            <span class='amber-text labelGod'>{{i.Name}}</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            {% endfor %}
-        </div>
-        
-    </div>
-</div>
 
-<script type="text/javascript" src="../static/js/vendor/jquery-2.1.3.min.js"></script>
-<script type="text/javascript" src="../static/js/vendor/materialize.min.js"></script>
-<script type="text/javascript" src="../static/js/vendor/materialize.js"></script>
-<script type="text/javascript" src="../static/js/player.js"></script>
-</body>
-</html>
+        <ul id="slide-out" class="sidenav indigo darken-4">
+            <li class="center-align">
+                <span class="amber-text labelGod">Filtros</span>
+            </li>
+            <li>
+             <div class="divider amber"></div>
+            </li>
+            <li>
+                <div class="row center-align">
+                    <div class="col s12">
+                        <a href='#' id="altWarriors"><img class="responsive-img" src="../static/imagens/warriors.png" width="245"></a>
+                    </div>
+                    <div class="col s12">
+                        <a href='#' id="altHunters"><img class="responsive-img" src="../static/imagens/hunters.jpg" width="245"></a>
+                    </div>
+                    <div class="col s12">
+                        <a href='#' id="altMages"><img class="responsive-img" src="../static/imagens/mages.png" width="245"></a>
+                    </div>
+                    <div class="col s12">
+                        <a href='#' id="altGuardians"><img class="responsive-img" src="../static/imagens/guardians.jpg" width="245"></a>
+                    </div>
+                    <div class="col s12">
+                        <a href='#' id="altAssassins"><img class="responsive-img" src="../static/imagens/assassins.png" width="245"></a>
+                    </div>
+                </li>
+            </ul>
+            <a href="#" data-target="slide-out" class="sidenav-trigger amber-text"><i class="material-icons">menu</i><span class="amber-text labelGod">Filtros</span></a>
+            
+                <div class='row' id="todos">
+                    {% for i in deuses %}
+                    <div class="col s2 m2">
+                        <a href="{{url_for('playerGod', id=i.id)}}">
+                            <div class="card" id="cardGod">
+                                <div class="card-image">
+                                    <img class='iconGod' src="{{i['godIcon_URL']}}">
+                                </div>
+                                <div class="card-content center-align contentGod">
+                                    <span class='amber-text labelGod'>{{i.Name}}</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class='row hide' id="magos">
+                    {% for i in deuses %}
+                    {% if i.Roles==' Mago' %}
+                    <div class="col s2 m2">
+                        <a href="{{url_for('playerGod', id=i.id)}}">
+                            <div class="card" id="cardGod">
+                                <div class="card-image">
+                                    <img class='iconGod' src="{{i['godIcon_URL']}}">
+                                </div>
+                                <div class="card-content center-align contentGod">
+                                    <span class='amber-text labelGod'>{{i.Name}}</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                
+                <div class='row hide' id="guerreiros">
+                    {% for i in deuses %}
+                    {% if i.Roles==' Guerreiro' %}
+                    <div class="col s2 m2">
+                        <a href="{{url_for('playerGod', id=i.id)}}">
+                            <div class="card" id="cardGod">
+                                <div class="card-image">
+                                    <img class='iconGod' src="{{i['godIcon_URL']}}">
+                                </div>
+                                <div class="card-content center-align contentGod">
+                                    <span class='amber-text labelGod'>{{i.Name}}</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                
+                <div class='row hide' id="cacadores">
+                    {% for i in deuses %}
+                    {% if i.Roles==' Caçador' %}
+                    <div class="col s2 m2">
+                        <a href="{{url_for('playerGod', id=i.id)}}">
+                            <div class="card" id="cardGod">
+                                <div class="card-image">
+                                    <img class='iconGod' src="{{i['godIcon_URL']}}">
+                                </div>
+                                <div class="card-content center-align contentGod">
+                                    <span class='amber-text labelGod'>{{i.Name}}</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                
+                <div class='row hide' id="assassinos">
+                    {% for i in deuses %}
+                    {% if i.Roles==' Assassino' %}
+                    <div class="col s2 m2">
+                        <a href="{{url_for('playerGod', id=i.id)}}">
+                            <div class="card" id="cardGod">
+                                <div class="card-image">
+                                    <img class='iconGod' src="{{i['godIcon_URL']}}">
+                                </div>
+                                <div class="card-content center-align contentGod">
+                                    <span class='amber-text labelGod'>{{i.Name}}</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                
+                <div class='row hide' id="guardioes">
+                    {% for i in deuses %}
+                    {% if i.Roles==' Guardião' %}
+                    <div class="col s2 m2">
+                        <a href="{{url_for('playerGod', id=i.id)}}">
+                            <div class="card" id="cardGod">
+                                <div class="card-image">
+                                    <img class='iconGod' src="{{i['godIcon_URL']}}">
+                                </div>
+                                <div class="card-content center-align contentGod">
+                                    <span class='amber-text labelGod'>{{i.Name}}</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            <script type="text/javascript" src="../static/js/vendor/jquery-2.1.3.min.js"></script>
+            <script type="text/javascript" src="../static/js/vendor/materialize.min.js"></script>
+            <script type="text/javascript" src="../static/js/vendor/materialize.js"></script>
+            <script type="text/javascript" src="../static/js/deuses.js"></script>
+        </body>
+        </html>

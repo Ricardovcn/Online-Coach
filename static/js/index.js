@@ -1,8 +1,10 @@
 $(document).ready(function(){
  
   $('#btn').click(function(){
-      
-    window.location.href = '/deuses/'+$('#nick').val();  
+    
+    $('#btn').addClass("hide");
+    $('#carg').removeClass("hide");
+    window.location.href = '/perfil/'+$('#nick').val();  
   })
 
   

@@ -9,23 +9,7 @@ body{
     background-attachment: fixed;
   }
 
-#container{
-    width: 100%;
-}
-
-#navBar{
-    border-bottom: 2px solid #ffd740;
-}
 
 .opaco{
-    background-color: rgba(255,255,255,0.2)
-}
-
-.iconGod{
-    width: 75px;
-    height: 175px;
-}
-
-.labelGod{
-    font-size: 20px;
+    background-color: rgba(255,255,255,0.3)
 }
