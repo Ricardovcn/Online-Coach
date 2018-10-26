@@ -14,6 +14,7 @@ devId = '2884'
 authKey = '555796E8AFC1466EAD08B6B325BD6D1B'
 
 urlPrefixo = 'http://api.smitegame.com/smiteapi.svc/'
+urlPrefixoYtb = 'https://www.youtube.com/embed/'
 
 #Id da sessãoq ue será utilizado em todas as requisições
 #Vale lembrar que cada sessão possui apenas 15 min
@@ -24,7 +25,7 @@ nickname = ''
 
 player = ''
 
-deuses = ''
+deuses = '' 
 
 linguas = {'portugues':10,'english':1}
 
@@ -114,21 +115,30 @@ def perfil(nick):
     print(dadosPLayer[0]['Wins'])
     dadoPLayer = dadosPLayer[0]
     print(type(dadoPLayer))
-
+    with open('./dicas/dicas.json', 'r') as d:
+      jsond = json.loads(d.read())
     if dadoPLayer['MasteryLevel'] < 80:
-      dicas.append({'titulo': 'Maestrias', 'texto': 'Vc precisa melhorar', 'video': 'SMITE - EXPLICANDO SOBRE MAESTRIA DE DEUSES'})
+      r = requests.get('https://www.googleapis.com/youtube/v3/search?part=id&order=relevance&q=SMITE - EXPLICANDO SOBRE MAESTRIA DE DEUSES&key=AIzaSyDrcUdUEc-7E_QqCh9GTBry4zfh3An5SWg') 
+      ytbResp = json.loads(r.text)
+      dicas.append({'titulo': 'Maestrias', 'texto': jsond['dicaMaestrias'], 'video': urlPrefixoYtb+ytbResp['items'][0]['id']['videoId']})
 
-    if dadoPLayer['Wins'] * 100 / (dadoPLayer['Wins'] + dadoPLayer['Losses']) < 65: 
-      dicas.append({'titulo': 'Taxa de Vitórias', 'texto': 'Vc precisa melhorar', 'video': None})
+    if dadoPLayer['Wins'] * 100 / (dadoPLayer['Wins'] + dadoPLayer['Losses']) < 60:
+      dicas.append({'titulo': 'Taxa de Vitórias', 'texto': jsond['dicaVitoria'], 'video': ''})
     
-    if dadoPLayer['Tier_Conquest'] == 0:
-      dicas.append({'titulo': 'Conquista Rankeada', 'texto': 'Vc precisa melhorar', 'video': 'SMITE LIGA CONQUISTA - INFORMAÇOES BÁSICAS SOBRE ELO E ORDEM DE PICK'})
+    if dadoPLayer['Tier_Conquest'] < 14:
+      r = requests.get('https://www.googleapis.com/youtube/v3/search?part=id&order=relevance&q=SMITE LIGA CONQUISTA - INFORMAÇOES BÁSICAS SOBRE ELO E ORDEM DE PICK&key=AIzaSyDrcUdUEc-7E_QqCh9GTBry4zfh3An5SWg') 
+      ytbResp = json.loads(r.text)
+      dicas.append({'titulo': 'Conquista Rankeada', 'texto': 'Vc precisa melhorar', 'video': urlPrefixoYtb+ytbResp['items'][0]['id']['videoId']})
     
-    if dadoPLayer['Tier_Joust'] == 0:
-      dicas.append({'titulo': 'Justa Rankeada (3 vs 3)', 'texto': 'Vc precisa melhorar', 'video': 'SMITE - DICAS PARA SUBIR DE ELO NA JUSTA 3X3'})
+    if dadoPLayer['Tier_Joust'] < 14:
+      r = requests.get('https://www.googleapis.com/youtube/v3/search?part=id&order=relevance&q=SMITE - DICAS PARA SUBIR DE ELO NA JUSTA 3X3&key=AIzaSyDrcUdUEc-7E_QqCh9GTBry4zfh3An5SWg') 
+      ytbResp = json.loads(r.text)
+      dicas.append({'titulo': 'Justa Rankeada (3 vs 3)', 'texto': 'Vc precisa melhorar', 'video': urlPrefixoYtb+ytbResp['items'][0]['id']['videoId']})
     
-    if dadoPLayer['Tier_Duel'] == 0: 
-      dicas.append({'titulo': 'Justa Rankeada (1 vs 1)', 'texto': 'Vc precisa melhorar', 'video': 'SMITE - DICAS PARA SE DAR BEM NO DUELO'})
+    if dadoPLayer['Tier_Duel'] < 14: 
+      r = requests.get('https://www.googleapis.com/youtube/v3/search?part=id&order=relevance&q=SMITE - DICAS PARA SE DAR BEM NO DUELO&key=AIzaSyDrcUdUEc-7E_QqCh9GTBry4zfh3An5SWg') 
+      ytbResp = json.loads(r.text)
+      dicas.append({'titulo': 'Justa Rankeada (1 vs 1)', 'texto': 'Vc precisa melhorar', 'video': urlPrefixoYtb+ytbResp['items'][0]['id']['videoId']})
 
     return render_template('perfil.html', players=dadosPLayer , elo=elos, dica=dicas)
 
@@ -136,7 +146,7 @@ def perfil(nick):
 
 @app.route('/player/deus/<id>', methods=['GET', 'POST'])
 def playerGod(id):
-  return 'asd'
+  return render_template('deus.html')
 
 if __name__ == "__main__":
  app.run(debug=True)
