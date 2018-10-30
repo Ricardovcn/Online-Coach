@@ -18,23 +18,32 @@ body{
 }
 
 #cardGod{
-    background-color: rgba(255,255,255,0.2)
+    background-color: rgba(255,255,255,0.3)
 }
 
 .opaco{
     background-color: rgba(255,255,255,0.2)
 }
 
-
 .iconGod{
     width: 75px;
     height: 175px;
 }
 
-.labelGod{
+#slide-out{
+    border-right: 2px solid #ffd740;
+}
+
+.texto{
+    font-family: 'Righteous', cursive;
     font-size: 20px;
 }
 
-#slide-out{
-    border-right: 2px solid #ffd740;
+.subtitulo{
+    font-family: 'Righteous', cursive;
+    font-size: 28px;
+}
+
+.titulo{
+    font-family: 'Righteous', cursive;
 }

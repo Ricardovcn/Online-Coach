@@ -9,40 +9,43 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/materialize.min.css')}}">
     <link rel="stylesheet" href="../static/css/perfil.css">
     <link href="{{url_for('static', filename='css/icon.css')}}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet"> 
     
     <nav>
         <div class="nav-wrapper indigo darken-4" id="navBar">
             <a class="brand-logo"><img class="responsive-img" src="../static/imagens/smite.png" width="180"></a>
             <ul id="nav-mobile" class="right">
-                <li><a href="/deuses" class="amber-text"><b>Deuses</b></a></li>
+                <li><a href="/deuses" class="amber-text"><span class="subtitulo">Deuses</span></a></li>
                 <li><a href="/"><i class="material-icons amber-text">subdirectory_arrow_left</i></a></li>
             </ul>
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container texto">
+            <h3 class="amber-text center-align titulo">Perfil</h3>
+            <div class="divider amber"></div>
             {% for p in players %}
-                <p class="amber-text"><b>Nome:</b> {{p.Name}}</p>
-                <p class="amber-text"><b>Level:</b> {{p['Level']}}</p>
-                <p class="amber-text"><b>Maestrias:</b> {{p.MasteryLevel}}</p>
-                <p class="amber-text"><b>Vitórias:</b> {{p.Wins}}</p>
-                <p class="amber-text"><b>Derrotas:</b> {{p.Losses}}</p>
-                <p class="amber-text"><b>Porcentagem de Vitórias:</b> {{ "%.1f"|format(p.Wins * 100 / (p.Wins+p.Losses))}} %</p>
+                <p class="amber-text"><span class="subtitulo" >Nome:</span> {{p.Name}}</p>
+                <p class="amber-text"><span class="subtitulo">Level:</span> {{p['Level']}}</p>
+                <p class="amber-text"><span class="subtitulo">Maestrias:</span> {{p.MasteryLevel}}</p>
+                <p class="amber-text"><span class="subtitulo">Vitórias:</span> {{p.Wins}}</p>
+                <p class="amber-text"><span class="subtitulo">Derrotas:</span> {{p.Losses}}</p>
+                <p class="amber-text"><span class="subtitulo">Porcentagem de Vitórias:</span> {{ "%.1f"|format(p.Wins * 100 / (p.Wins+p.Losses))}} %</p>
                 <ul class="amber-text">
-                        <span><b>Classificação no Competitivo</b></span>
-                        <li class="amber-text"><b>Conquista:</b> {{ elo[p.Tier_Conquest|string] }}</li>
-                        <li class="amber-text"><b>Justa:</b> {{ elo[p.Tier_Joust|string] }}</li>
-                        <li class="amber-text"><b>Duelo:</b> {{ elo[p.Tier_Duel|string] }}</li>
+                        <span class = "subtitulo center-align">Classificação no Competitivo</span>
+                        <li class="amber-text"><span class = "subtitulo">Conquista:</span> {{ elo[p.Tier_Conquest|string] }}</li>
+                        <li class="amber-text"><span class = "subtitulo">Justa:</span> {{ elo[p.Tier_Joust|string] }}</li>
+                        <li class="amber-text"><span class = "subtitulo">Duelo:</span> {{ elo[p.Tier_Duel|string] }}</li>
                 </ul>
             {% endfor %}
 
             <div class="divider amber"></div>
-            <h3 class="amber-text center-align">Dicas</h3>
+            <h3 class="amber-text center-align titulo">Dicas</h3>
             {% for dado in dica %}
                 <div class="divider amber"></div>
                 <div class="row">
-                    <h4 class="amber-text col s12 left">{{dado['titulo']}}</h4>
-                    <div class="col s12 left amber-text">{{dado['texto']}}</div>
+                    <h4 class="amber-text col s12 left titulo">{{dado['titulo']}}</h4>
+                    <div class="col s12 left amber-text texto">{{dado['texto']}}</div>
                     {% if dado['video'] != '' %}
                         <div id="video" class="col s12 center-align">
                             <iframe width="50%" height="415" src="{{dado['video']}}" frameborder="0" encrypted-media" allowfullscreen></iframe>

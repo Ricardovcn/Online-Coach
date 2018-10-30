@@ -29,3 +29,17 @@ body{
     font-size: 300%;
     color: white;  
 }
+
+.texto{
+    font-family: 'Righteous', cursive;
+    font-size: 20px;
+}
+
+.subtitulo{
+    font-family: 'Righteous', cursive;
+    font-size: 28px;
+}
+
+.titulo{
+    font-family: 'Righteous', cursive;
+}

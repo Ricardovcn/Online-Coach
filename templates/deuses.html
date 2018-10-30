@@ -7,8 +7,10 @@
 <body>
     <link rel="stylesheet" href="{{url_for('static', filename='css/materialize.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/materialize.min.css')}}">
-    <link rel="stylesheet" href="../static/css/deuses.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/deuses.css')}}">
     <link href="{{url_for('static', filename='css/icon.css')}}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet"> 
+
 
     <nav>
         <div class="nav-wrapper indigo darken-4" id="navBar">
@@ -21,7 +23,7 @@
 
         <ul id="slide-out" class="sidenav indigo darken-4">
             <li class="center-align">
-                <span class="amber-text labelGod">Filtros</span>
+                <span class="amber-text subtitulo">Filtros</span>
             </li>
             <li>
              <div class="divider amber"></div>
@@ -45,8 +47,7 @@
                     </div>
                 </li>
             </ul>
-            <a href="#" data-target="slide-out" class="sidenav-trigger amber-text"><i class="material-icons">menu</i><span class="amber-text labelGod">Filtros</span></a>
-            
+            <a href="#" data-target="slide-out" class="sidenav-trigger amber-text"><i class="material-icons">menu</i><span class="amber-text labelGod subtitulo">Filtros</span></a>
                 <div class='row' id="todos">
                     {% for i in deuses %}
                     <div class="col s2 m2">
@@ -56,7 +57,7 @@
                                     <img class='iconGod' src="{{i['godIcon_URL']}}">
                                 </div>
                                 <div class="card-content center-align contentGod">
-                                    <span class='amber-text labelGod'>{{i.Name}}</span>
+                                    <span class='amber-text labelGod texto'>{{i.Name}}</span>
                                 </div>
                             </div>
                         </a>

@@ -85,7 +85,7 @@ def api():
     return json.dumps({'erro': 'Utilize o metodo GET para acessar essa API.'})
 
 @app.route('/deuses', methods=['GET', 'POST'])
-def deuses():
+def deusesPagina():
   global deuses
   try:
     with open('/cache/gods.json', 'r') as f:
@@ -94,8 +94,8 @@ def deuses():
     gods =  requisicaoDeuses(urlPrefixo, 'getgods', 'json', devId, authKey, session,linguas['portugues'])
     f = open('./cache/gods.json', 'w')
     f.write(gods)
-  deuses = gods
   gods = json.loads(gods)
+  deuses = gods
   return render_template('deuses.html', deuses = gods, nick=nickname)
 
 @app.route('/perfil/<nick>', methods=['GET', 'POST'])
@@ -112,12 +112,10 @@ def perfil(nick):
     # requisicaoPartidas(urlPrefixo, 'getqueuestats​', 'json', devId, authKey, session, nick, partidas['Arena'])
     # print(requisicaoPartidas)
     dicas = []
-    print(dadosPLayer[0]['Wins'])
     dadoPLayer = dadosPLayer[0]
-    print(type(dadoPLayer))
     with open('./dicas/dicas.json', 'r') as d:
       jsond = json.loads(d.read())
-    if dadoPLayer['MasteryLevel'] < 80:
+    if dadoPLayer['MasteryLevel'] < 75:
       r = requests.get('https://www.googleapis.com/youtube/v3/search?part=id&order=relevance&q=SMITE - EXPLICANDO SOBRE MAESTRIA DE DEUSES&key=AIzaSyDrcUdUEc-7E_QqCh9GTBry4zfh3An5SWg') 
       ytbResp = json.loads(r.text)
       dicas.append({'titulo': 'Maestrias', 'texto': jsond['dicaMaestrias'], 'video': urlPrefixoYtb+ytbResp['items'][0]['id']['videoId']})
@@ -146,7 +144,12 @@ def perfil(nick):
 
 @app.route('/player/deus/<id>', methods=['GET', 'POST'])
 def playerGod(id):
-  return render_template('deus.html')
+  global deuses
+  god=''
+  for i in deuses:
+    if str(i['id']) == str(id):
+      god = i
+  return render_template('deus.html', god = god)
 
 if __name__ == "__main__":
  app.run(debug=True)

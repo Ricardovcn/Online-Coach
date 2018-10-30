@@ -12,3 +12,18 @@ body{
 #navBar{
     border-bottom: 2px solid #ffd740;
 }
+
+.texto{
+    font-family: 'Righteous', cursive;
+    font-size: 20px;
+    word-spacing:6px;
+}
+
+.subtitulo{
+    font-family: 'Righteous', cursive;
+    font-size: 28px;
+}
+
+.titulo{
+    font-family: 'Righteous', cursive;
+}
