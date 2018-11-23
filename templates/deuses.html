@@ -9,45 +9,45 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/materialize.min.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/deuses.css')}}">
     <link href="{{url_for('static', filename='css/icon.css')}}" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
 
     <nav>
-        <div class="nav-wrapper indigo darken-4" id="navBar">
-            <a class="brand-logo"><img class="responsive-img" src="../static/imagens/smite.png" width="180"></a>
+            <div class="nav-wrapper deep-purple darken-4" id="navBar">
+          
+            <ul id="nav-mobile" class="left">
+                <li><a href="/"><span class="subtitulo">Home</span></a></li>
+            </ul>
             <ul id="nav-mobile" class="right">
-                <li><a href="/perfil/{{nick}}"><i class="material-icons amber-text">subdirectory_arrow_left</i></a></li>
+                <li><a href="/perfil/{{nick}}"><i class="material-icons">subdirectory_arrow_left</i></a></li>
             </ul>
         </div>
     </nav>
 
-        <ul id="slide-out" class="sidenav indigo darken-4">
+        <ul id="slide-out" class="sidenav deep-purple darken-4">
             <li class="center-align">
-                <span class="amber-text subtitulo">Filtros</span>
-            </li>
-            <li>
-             <div class="divider amber"></div>
+                <span class="subtitulo white-text">Filtros</span>
             </li>
             <li>
                 <div class="row center-align">
                     <div class="col s12">
-                        <a href='#' id="altWarriors"><img class="responsive-img" src="../static/imagens/warriors.png" width="245"></a>
+                        <a href='#' id="altWarriors"><img class="sidenav-close responsive-img" src="../static/imagens/warriors.png" width="245"></a>
                     </div>
                     <div class="col s12">
-                        <a href='#' id="altHunters"><img class="responsive-img" src="../static/imagens/hunters.jpg" width="245"></a>
+                        <a href='#' id="altHunters"><img class="sidenav-close responsive-img" src="../static/imagens/hunters.jpg" width="245"></a>
                     </div>
                     <div class="col s12">
-                        <a href='#' id="altMages"><img class="responsive-img" src="../static/imagens/mages.png" width="245"></a>
+                        <a href='#' id="altMages"><img class="sidenav-close responsive-img" src="../static/imagens/mages.png" width="245"></a>
                     </div>
                     <div class="col s12">
-                        <a href='#' id="altGuardians"><img class="responsive-img" src="../static/imagens/guardians.jpg" width="245"></a>
+                        <a href='#' id="altGuardians"><img class="sidenav-close responsive-img" src="../static/imagens/guardians.jpg" width="245"></a>
                     </div>
                     <div class="col s12">
-                        <a href='#' id="altAssassins"><img class="responsive-img" src="../static/imagens/assassins.png" width="245"></a>
+                        <a href='#' id="altAssassins"><img class="sidenav-close responsive-img" src="../static/imagens/assassins.png" width="245"></a>
                     </div>
                 </li>
             </ul>
-            <a href="#" data-target="slide-out" class="sidenav-trigger amber-text"><i class="material-icons">menu</i><span class="amber-text labelGod subtitulo">Filtros</span></a>
+            <a href="#" data-target="slide-out" class="sidenav-trigger textoPurple"><i class="material-icons">menu</i><span class="textoPurple subtitulo">Filtros</span></a>
                 <div class='row' id="todos">
                     {% for i in deuses %}
                     <div class="col s2 m2">
@@ -57,7 +57,7 @@
                                     <img class='iconGod' src="{{i['godIcon_URL']}}">
                                 </div>
                                 <div class="card-content center-align contentGod">
-                                    <span class='amber-text labelGod texto'>{{i.Name}}</span>
+                                    <span class='textoPurple labelGod texto'>{{i.Name}}</span>
                                 </div>
                             </div>
                         </a>
@@ -74,7 +74,7 @@
                                     <img class='iconGod' src="{{i['godIcon_URL']}}">
                                 </div>
                                 <div class="card-content center-align contentGod">
-                                    <span class='amber-text labelGod'>{{i.Name}}</span>
+                                    <span class='textoPurple labelGod texto'>{{i.Name}}</span>
                                 </div>
                             </div>
                         </a>
@@ -93,7 +93,7 @@
                                     <img class='iconGod' src="{{i['godIcon_URL']}}">
                                 </div>
                                 <div class="card-content center-align contentGod">
-                                    <span class='amber-text labelGod'>{{i.Name}}</span>
+                                    <span class='textoPurple labelGod texto'>{{i.Name}}</span>
                                 </div>
                             </div>
                         </a>
@@ -112,7 +112,7 @@
                                     <img class='iconGod' src="{{i['godIcon_URL']}}">
                                 </div>
                                 <div class="card-content center-align contentGod">
-                                    <span class='amber-text labelGod'>{{i.Name}}</span>
+                                    <span class='textoPurple labelGod texto'>{{i.Name}}</span>
                                 </div>
                             </div>
                         </a>
@@ -131,7 +131,7 @@
                                     <img class='iconGod' src="{{i['godIcon_URL']}}">
                                 </div>
                                 <div class="card-content center-align contentGod">
-                                    <span class='amber-text labelGod'>{{i.Name}}</span>
+                                    <span class='textoPurple labelGod texto'>{{i.Name}}</span>
                                 </div>
                             </div>
                         </a>
@@ -150,7 +150,7 @@
                                     <img class='iconGod' src="{{i['godIcon_URL']}}">
                                 </div>
                                 <div class="card-content center-align contentGod">
-                                    <span class='amber-text labelGod'>{{i.Name}}</span>
+                                    <span class='textoPurple labelGod texto'>{{i.Name}}</span>
                                 </div>
                             </div>
                         </a>

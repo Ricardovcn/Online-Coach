@@ -1,0 +1,18 @@
+body{
+    background-image: url('../imagens/background2.jpg'); 
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-attachment: fixed;
+  }
+
+  
+.textoPurple{
+    color: #311b92;
+}
+
+.subtitulo{
+    font-family: 'Roboto', sans-serif;
+    font-size: 28px;
+}

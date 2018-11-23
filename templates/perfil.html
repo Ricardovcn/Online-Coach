@@ -9,54 +9,77 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/materialize.min.css')}}">
     <link rel="stylesheet" href="../static/css/perfil.css">
     <link href="{{url_for('static', filename='css/icon.css')}}" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet"> 
-    
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
     <nav>
-        <div class="nav-wrapper indigo darken-4" id="navBar">
-            <a class="brand-logo"><img class="responsive-img" src="../static/imagens/smite.png" width="180"></a>
+        <div class="nav-wrapper deep-purple darken-4" id="navBar">
+      
+            <ul id="nav-mobile" class="left">
+                <li><a href="/"><span class="subtitulo">Home</span></a></li>
+            </ul>
             <ul id="nav-mobile" class="right">
-                <li><a href="/deuses" class="amber-text"><span class="subtitulo">Deuses</span></a></li>
-                <li><a href="/"><i class="material-icons amber-text">subdirectory_arrow_left</i></a></li>
+                <li><a href="/deuses"><span class="subtitulo">Deuses</span></a></li>
+                <li><a href="/"><i class="material-icons">subdirectory_arrow_left</i></a></li>
             </ul>
         </div>
     </nav>
 
     <div class="container texto">
-            <h3 class="amber-text center-align titulo">Perfil</h3>
-            <div class="divider amber"></div>
-            {% for p in players %}
-                <p class="amber-text"><span class="subtitulo" >Nome:</span> {{p.Name}}</p>
-                <p class="amber-text"><span class="subtitulo">Level:</span> {{p['Level']}}</p>
-                <p class="amber-text"><span class="subtitulo">Maestrias:</span> {{p.MasteryLevel}}</p>
-                <p class="amber-text"><span class="subtitulo">Vitórias:</span> {{p.Wins}}</p>
-                <p class="amber-text"><span class="subtitulo">Derrotas:</span> {{p.Losses}}</p>
-                <p class="amber-text"><span class="subtitulo">Porcentagem de Vitórias:</span> {{ "%.1f"|format(p.Wins * 100 / (p.Wins+p.Losses))}} %</p>
-                <ul class="amber-text">
-                        <span class = "subtitulo center-align">Classificação no Competitivo</span>
-                        <li class="amber-text"><span class = "subtitulo">Conquista:</span> {{ elo[p.Tier_Conquest|string] }}</li>
-                        <li class="amber-text"><span class = "subtitulo">Justa:</span> {{ elo[p.Tier_Joust|string] }}</li>
-                        <li class="amber-text"><span class = "subtitulo">Duelo:</span> {{ elo[p.Tier_Duel|string] }}</li>
-                </ul>
-            {% endfor %}
-
-            <div class="divider amber"></div>
-            <h3 class="amber-text center-align titulo">Dicas</h3>
-            {% for dado in dica %}
-                <div class="divider amber"></div>
+            <div class="white card textoPurple">
                 <div class="row">
-                    <h4 class="amber-text col s12 left titulo">{{dado['titulo']}}</h4>
-                    <div class="col s12 left amber-text texto">{{dado['texto']}}</div>
-                    {% if dado['video'] != '' %}
-                        <div id="video" class="col s12 center-align">
-                            <iframe width="50%" height="415" src="{{dado['video']}}" frameborder="0" encrypted-media" allowfullscreen></iframe>
+                    {% for p in players %}
+                            <div class="card-image">
+                                    <img src="{{url_for('static', filename='imagens/background3m1.jpg')}}">
+                                    <span class="card-title"><spam class="subtitulo">Perfil</spam></span>
+                            </div>
+                            <div class="col s6">
+                                <p class="subtitulo" ><b>Nome:</b> {{p.Name}}</p>
+                                <p class="subtitulo"><b>Vitórias:</b> {{p.Wins}}</p>
+                                <p><spsan class="subtitulo"><b>Maestrias:</b></span> {{p.MasteryLevel}}</p>
+                            </div>
+                            <div class="col s6">
+                                <p class="subtitulo"><b>Level:</b> {{p['Level']}}</p>
+                                <p class="subtitulo"><b>Derrotas:</b> {{p.Losses}}</p>
+                                <p class="subtitulo"></pclass><b>Vitórias (%):</b> {{ "%.1f"|format(p.Wins * 100 / (p.Wins+p.Losses))}} %</p>
+                            </div>
+                            <div class="col s12">
+                                <p class = "subtitulo"><b>Conquista:</b> {{ elo[p.Tier_Conquest|string] }}</p>
+                                <p class = "subtitulo"><b>Justa:</b> {{ elo[p.Tier_Joust|string] }}</p>
+                                <p class = "subtitulo"><b>Duelo:</b> {{ elo[p.Tier_Duel|string] }}</p>
+                            </div>
                         </div>
-                    {% endif %}
+                        {% endfor %}
+            {% if(dica|length != 0) %}
+                <div class="card-image">
+                        <img src="{{url_for('static', filename='imagens/background3m2.jpg')}}">
+                        <span class="card-title"><spam class="subtitulo">Dicas</spam></span>
                 </div>
-            {% endfor %}
+                <ul class="collapsible">
+                    {% for dado in dica %}
+                    <li>
+                    <div class="collapsible-header deep-purple darken-4 white-text subtitulo">{{dado['titulo']}}</div>
+                    <div class="collapsible-body white textoPurple">
+                        <div class="row">
+                            <div class="col s12">
+                                <span>{{dado['texto']}}</span>
+                                <br>
+                            </div>
+                            {% if dado['video'] != '' %}
+                            <div id="video" class="col s12 center-align">
+                                <iframe width="80%" height="350px" src="{{dado['video']}}" frameborder="0" encrypted-media" allowfullscreen></iframe>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
     </div>
-    
     <script type="text/javascript" src="../static/js/vendor/jquery-2.1.3.min.js"></script>
     <script type="text/javascript" src="../static/js/vendor/materialize.min.js"></script>
     <script type="text/javascript" src="../static/js/vendor/materialize.js"></script>
+    <script type="text/javascript" src="../static/js/perfil.js"></script>
 </body>
 </html>

@@ -1,29 +1,37 @@
 body{
-    background-image: url('../imagens/background2.jpg'); 
+   /* background-image: url('../imagens/background2.jpg'); */
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: black;
+    background-color: #b39ddb;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-attachment: fixed;
   }
 
-#navBar{
-    border-bottom: 2px solid #ffd740;
+.textoPurple{
+    color: #311b92;
 }
 
 .texto{
-    font-family: 'Righteous', cursive;
+    font-family: 'Roboto', sans-serif;
     font-size: 20px;
     word-spacing:6px;
 }
 
 .subtitulo{
-    font-family: 'Righteous', cursive;
+    font-family: 'Roboto', sans-serif;
     font-size: 28px;
 }
 
 .titulo{
-    font-family: 'Righteous', cursive;
+    font-family: 'Roboto', sans-serif;
+}
+
+.opaco{
+    background-color: rgba(255,255,255,0.3)
+}
+
+.opaco2{
+    background-color: rgba(255,255,255,0.0)
 }

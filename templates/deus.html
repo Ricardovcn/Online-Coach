@@ -13,17 +13,21 @@
 
     
     <nav>
-        <div class="nav-wrapper indigo darken-4" id="navBar">
-            <a class="brand-logo"><img class="responsive-img" src="{{url_for('static', filename='imagens/smite.png')}}" width="180"></a>
-            <ul id="nav-mobile" class="right">
-                <li><a href="/deuses"><i class="material-icons amber-text">subdirectory_arrow_left</i></a></li>
+        <div class="nav-wrapper deep-purple darken-4" id="navBar">
+        <ul id="nav-mobile" class="left">
+            <li><a href="/"><span class="subtitulo">Home</span></a></li>
+        </ul>
+        <ul id="nav-mobile" class="right">
+                <li><a href="/deuses"><i class="material-icons white-text">subdirectory_arrow_left</i></a></li>
             </ul>
         </div>
     </nav>
 
     <div class="container">
-        <h3 class="amber-text center-align titulo">{{god.Name}}</h3>
-                <div class="card opaco">
+                <div class="card textoPurple" id="cardGodp">
+                    <div class="row">
+                        <h3 class="center-align titulo">{{god.Name}}</h3>
+                    </div>
                     <div class ="row">
                         <div class="col s3">
                             <div class="card-image">
@@ -31,86 +35,161 @@
                             </div>
                         </div>
                         <div class="col s7">
-                            <div class="card-content center-align contentGod">
-                                <span class='amber-text labelGod texto'>{{god.Lore}}</span>
+                            <div class="card-content left-align contentGod">
+                                <p class='subtitulo'><b>Panteão:</b> {{god.Pantheon}}</p>
+                                <p class='subtitulo'><b>Classe:</b> {{god.Roles}}</p>
+                                <p class='subtitulo'><b>Tipo:</b> {{god.Type}}</p>
+                                <p class='subtitulo'><b>Prós:</b> {{god.Pros}}</p>
+                                <p class='subtitulo'><b>Vida:</b> {{god.Health}}</p>
+                                <p class='subtitulo'><b>Mana:</b> {{god.Mana}}</p>
+                                <p class='subtitulo'><b>Cadencia:</b> {{"%.2f"|format(god.AttackSpeed) }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
-        <h3 class="amber-text center-align titulo">Habilidades</h3>
-        <div class="card opaco">
-            <div class ="row">
-                <div class="col s2">
-                    <div class="card-image opaco">
-                        <img src="{{god['Ability_1']['URL']}}">
+        <br>
+        <ul class="collapsible">
+            <li>
+                <div class="collapsible-header deep-purple darken-4 white-text subtitulo">História</div>
+                <div class="collapsible-body opaco textoPurple texto"><span>{{god.Lore}}</span></div>
+            </li>
+            <li>
+                <div class="collapsible-header deep-purple darken-4 white-text subtitulo">Habilidades</div>
+                <div class="collapsible-body opaco textoPurple texto">
+                    <div class="card textoPurple opaco2">
+                        <div class ="row cardSkill">
+                            <div class="col s2">
+                                <div class="card-image opaco">
+                                    <img src="{{god['Ability_1']['URL']}}">
+                                </div>
+                            </div>
+                            <div class="col s10">
+                                <div class="card-content left-align">
+                                    <span class = "center-align subtitulo"><b>{{god['Ability1']}}</b></span><br>
+                                    <span class='texto'>{{god['Ability_1']['Description']['itemDescription']['description']}}</span>
+                                    <br>
+                                    <span class='texto'><b>Cooldown:</b> {{god['Ability_1']['Description']['itemDescription']['cooldown']}}</span>
+                                    <br>
+                                    <span class='texto'><b>Custo:</b> {{god['Ability_1']['Description']['itemDescription']['cost']}}</span> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card textoPurple opaco2">
+                        <div class ="row cardSkill">
+                            <div class="col s2">
+                                <div class="card-image opaco">
+                                    <img src="{{god['Ability_2']['URL']}}">
+                                </div>
+                            </div>
+                            <div class="col s10">
+                                <div class="card-content left-align">
+                                    <span class = "center-align subtitulo"><b>{{god['Ability2']}}</b></span><br>
+                                    <span class='texto'>{{god['Ability_2']['Description']['itemDescription']['description']}}</span>
+                                    <br>
+                                    <span class='texto'><b>Cooldown:</b> {{god['Ability_2']['Description']['itemDescription']['cooldown']}}</span>
+                                    <br>
+                                    <span class='texto'><b>Custo:</b> {{god['Ability_2']['Description']['itemDescription']['cost']}}</span> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card textoPurple opaco2">
+                        <div class ="row cardSkill">
+                            <div class="col s2">
+                                <div class="card-image opaco">
+                                    <img src="{{god['Ability_3']['URL']}}">
+                                </div>
+                            </div>
+                            <div class="col s10">
+                                <div class="card-content left-align">
+                                    <span class = "center-align subtitulo"><b>{{god['Ability3']}}</b></span><br>
+                                    <span class='texto'>{{god['Ability_3']['Description']['itemDescription']['description']}}</span>
+                                    <br>
+                                    <span class='texto'><b>Cooldown:</b> {{god['Ability_3']['Description']['itemDescription']['cooldown']}}</span>
+                                    <br>
+                                    <span class='texto'><b>Custo:</b> {{god['Ability_3']['Description']['itemDescription']['cost']}}</span> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card textoPurple opaco2">
+                        <div class ="row cardSkill">
+                            <div class="col s2">
+                                <div class="card-image opaco">
+                                    <img src="{{god['Ability_4']['URL']}}">
+                                </div>
+                            </div>
+                            <div class="col s10">
+                                <div class="card-content left-align">
+                                    <span class = "center-align subtitulo"><b>{{god['Ability4']}}</b></span><br>
+                                    <span class='texto'>{{god['Ability_4']['Description']['itemDescription']['description']}}</span>
+                                    <br>
+                                    <span class='texto'><b>Cooldown:</b> {{god['Ability_4']['Description']['itemDescription']['cooldown']}}</span>
+                                    <br>
+                                    <span class='texto'><b>Custo:</b> {{god['Ability_4']['Description']['itemDescription']['cost']}}</span> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card textoPurple opaco2">
+                        <div class ="row cardSkill">
+                            <div class="col s2">
+                                <div class="card-image opaco">
+                                    <img src="{{god['Ability_5']['URL']}}">
+                                </div>
+                            </div>
+                            <div class="col s10">
+                                <div class="card-content left-align">
+                                    <span class = "center-align subtitulo"><b>{{god['Ability5']}} (Passiva)</b></span><br>
+                                    <span class='texto'>{{god['Ability_5']['Description']['itemDescription']['description']}}</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col s10">
-                    <div class="card-content left-align">
-                        <span class = "center-align amber-text subtitulo">{{god['Ability1']}}</span><br>
-                        <span class='amber-text texto'>{{god['Ability_1']['Description']['itemDescription']['description']}}</span>
-                    </div>
+            </li>
+            {% if (resultado.Wins+resultado.Losses) != 0 %}
+            <li>
+                <div class="collapsible-header deep-purple darken-4 white-text subtitulo">Resultados</div>
+                <div class="collapsible-body opaco textoPurple texto">
+                    <p class="subtitulo">Porcentagem de Vitórias: {{ "%.1f"|format(resultado.Wins * 100 / (resultado.Wins+resultado.Losses))}} %</p>
+                    <p class="subtitulo" >Média de assassinatos por partida: {{ "%.1f"|format(resultado.Kills/ (resultado.Wins+resultado.Losses)) }}</p>
+                    <p class="subtitulo">Média de assistências por partida: {{ "%.1f"|format(resultado.Assists/ (resultado.Wins+resultado.Losses)) }}</p>
+                    <p class="subtitulo">Média de mortes por partida:  {{ "%.1f"|format(resultado.Deaths/ (resultado.Wins+resultado.Losses)) }}</p>
+                    <p class="subtitulo">Média de gold por partida:  {{ "%.1f"|format(resultado.Gold/ (resultado.Wins+resultado.Losses)) }}</p>
                 </div>
-            </div>
-            <div class ="row">
-                <div class="col s2">
-                    <div class="card-image">
-                        <img src="{{god['Ability_2']['URL']}}">
+            </li>
+            {% endif %}
+            {% if dica != "" %}
+                <li>
+                    <div class="collapsible-header deep-purple darken-4 white-text subtitulo">Dica</div>
+                    <div class="collapsible-body opaco textoPurple texto">
+                        {{dica}}
                     </div>
-                </div>
-                <div class="col s10">
-                    <div class="card-content left-align">
-                        <span class = "center-align amber-text subtitulo">{{god['Ability2']}}</span><br>
-                        <span class='amber-text texto'>{{god['Ability_2']['Description']['itemDescription']['description']}}</span>
+                </li>
+                <li>
+                    <div class="collapsible-header deep-purple darken-4 white-text subtitulo">Videos</div>
+                    <div class="collapsible-body opaco textoPurple texto">
+                        <div id="video" class="col s12 center-align">
+                                <iframe width="70%" height="300px" src="{{videos[0]}}" frameborder="0" encrypted-media" allowfullscreen></iframe>
+                        </div>
+                        <div id="video" class="col s12 center-align">
+                                <iframe width="70%" height="300px" src="{{videos[1]}}" frameborder="0" encrypted-media" allowfullscreen></iframe>
+                        </div>
+                        <div id="video" class="col s12 center-align">
+                                <iframe width="70%" height="300px" src="{{videos[2]}}" frameborder="0" encrypted-media" allowfullscreen></iframe>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class ="row">
-                <div class="col s2">
-                    <div class="card-image">
-                        <img src="{{god['Ability_3']['URL']}}">
-                    </div>
-                </div>
-                <div class="col s10">
-                    <div class="card-content left-align">
-                        <span class = "center-align amber-text subtitulo">{{god['Ability3']}}</span><br>
-                        <span class='amber-text texto'>{{god['Ability_3']['Description']['itemDescription']['description']}} ( Passiva)</span>
-                    </div>
-                </div>
-            </div>
-            <div class ="row">
-                <div class="col s2">
-                    <div class="card-image">
-                        <img src="{{god['Ability_4']['URL']}}">
-                    </div>
-                </div>
-                <div class="col s10">
-                    <div class="card-content left-align">
-                        <span class = "center-align amber-text subtitulo">{{god['Ability4']}}</span><br>
-                        <span class='amber-text texto'>{{god['Ability_4']['Description']['itemDescription']['description']}}</span>
-                    </div>
-                </div>
-            </div>
-            <div class ="row">
-                <div class="col s2">
-                    <div class="card-image">
-                        <img src="{{god['Ability_5']['URL']}}">
-                    </div>
-                </div>
-                <div class="col s10">
-                    <div class="card-content left-align">
-                        <span class = "center-align amber-text subtitulo">{{god['Ability5']}} ( Passiva)</span><br>
-                        <span class='amber-text texto'>{{god['Ability_5']['Description']['itemDescription']['description']}}</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <h3 class="amber-text center-align titulo">Dicas</h3>
-    </div>
+                </li>
+            {% endif %}
+        </ul>
+      </div>
 
 
     <script type="text/javascript" src="{{url_for('static', filename='js/vendor/jquery-2.1.3.min.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='js/vendor/materialize.min.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='js/vendor/materialize.js')}}"></script>
+    <script type="text/javascript" src="../../static/js/deus.js"></script>
 </body>
 </html>

@@ -1,8 +1,7 @@
 body{
-    background-image: url('../imagens/background3.jpg'); 
+    background-color: #b39ddb;
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: black;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -13,16 +12,16 @@ body{
     width: 100%;
 }
 
-#navBar{
-    border-bottom: 2px solid #ffd740;
-}
-
 #cardGod{
     background-color: rgba(255,255,255,0.3)
 }
 
 .opaco{
     background-color: rgba(255,255,255,0.2)
+}
+
+.textoPurple{
+    color: #311b92;
 }
 
 .iconGod{
@@ -35,15 +34,15 @@ body{
 }
 
 .texto{
-    font-family: 'Righteous', cursive;
+    font-family: 'Roboto', sans-serif;
     font-size: 20px;
 }
 
 .subtitulo{
-    font-family: 'Righteous', cursive;
+    font-family: 'Roboto', sans-serif;
     font-size: 28px;
 }
 
 .titulo{
-    font-family: 'Righteous', cursive;
+    font-family: 'Roboto', sans-serif;
 }

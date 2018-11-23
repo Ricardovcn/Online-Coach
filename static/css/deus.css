@@ -1,36 +1,47 @@
 body{
-    background-image: url('../imagens/background2.jpg'); 
+    background-color: #b39ddb;
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: black;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-attachment: fixed;
   }
 
+.textoPurple{
+    color: #311b92;
+}
+
+.opaco{
+    background-color: rgba(255,255,255,0.3)
+}
+
+#cardGodp{
+    padding-bottom: 1%;
+}
+
+.cardSkill{
+    padding-top: 1.5%;
+}
+
 #container{
     width: 100%;
 }
 
-#navBar{
-    border-bottom: 2px solid #ffd740;
-}
-
-.opaco{
+.opaco2{
     background-color: rgba(255,255,255,0.0)
 }
 
 .texto{
-    font-family: 'Righteous', cursive;
+    font-family: 'Roboto', sans-serif;
     font-size: 20px;
 }
 
 .subtitulo{
-    font-family: 'Righteous', cursive;
+    font-family: 'Roboto', sans-serif;
     font-size: 28px;
 }
 
 .titulo{
-    font-family: 'Righteous', cursive;
+    font-family: 'Roboto', sans-serif;
 }
